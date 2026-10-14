@@ -1,24 +1,33 @@
-# Nestjs specific
-/dist
-/node_modules
-/build
-/tmp
+# dependencias e build
+node_modules/
+dist/
+dist-scripts/
+*.tsbuildinfo
+.tsbuildinfo
 
-# Logs
-logs
-*.log
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-
-# dotenv environment variable files
+# segredos / configuracao local (so os .example vao para o git)
 .env
-.env.development
-.env.test
-.env.production
+.env.*
+!.env.example
+waha/.env
+!waha/.env.example
 
-# temp directory
-.temp
-.tmp
+# dados de runtime
+*.FDB
+*.fdb
+*.fbk
+db/backups/
+storage/referencias/*
+!storage/referencias/.gitkeep
+waha/.sessions/
+waha/.media/
+
+# sobras e ferramentas locais
+*.bak
+*.bak-*
+*.log
+.DS_Store
+.vscode/
+.idea/
+.claude/
+coverage/

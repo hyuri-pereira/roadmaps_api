@@ -1,0 +1,17 @@
+services:
+  waha:
+    image: devlikeapro/waha
+    container_name: waha
+    restart: unless-stopped
+    # A API do TotalProjetos escuta na 5040 do host; o WAHA sai na 5030.
+    # Isso casa com WAHA_BASE_URL do api/.env (http://localhost:5030).
+    # A 3000 a direita e a porta interna fixa do WAHA, nao mexer.
+    ports:
+      - "5030:3000"
+    env_file:
+      - .env
+    volumes:
+      # Sessoes do WhatsApp: sem isso todo gestor precisa reler o QR
+      # sempre que o container for recriado.
+      - ./.sessions:/app/.sessions
+      - ./.media:/app/.media

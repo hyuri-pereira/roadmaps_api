@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-scripts
+.git
+.env
+.env.*
+!.env.example
+*.bak*
+*.log
+db/*.FDB
+db/*.fdb
+db/backups
+storage/referencias/*
+waha
