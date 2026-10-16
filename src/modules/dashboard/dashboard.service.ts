@@ -152,11 +152,15 @@ export class DashboardService {
     return [...colunas.values()].sort((a, b) => a.ordem - b.ordem);
   }
 
-  /** Cards que exigem atencao: parados, com pendencia externa ou com erro. */
+  /**
+   * Cards que exigem atencao: atrasados, parados, com pendencia externa ou
+   * com erro. Todos ainda nao concluidos.
+   */
   async atencao(usuario: UsuarioAutenticado): Promise<CardAcompanhamentoDto[]> {
     const visivel = await this.visibilidade(usuario);
     const condicoes = [
-      "(ETAPA_SPRINT IN ('PARADO', 'PENDENCIA_EXTERNA') " +
+      "(DATA_LIMITE < CURRENT_DATE " +
+        "OR ETAPA_SPRINT IN ('PARADO', 'PENDENCIA_EXTERNA') " +
         "OR SITUACAO_SINCRONIZACAO IN ('ERRO', 'CONFLITO'))",
       'CONCLUIDO = FALSE',
     ];

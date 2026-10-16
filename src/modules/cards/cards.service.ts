@@ -132,6 +132,18 @@ export class CardsService {
     if (dto.ordem !== undefined) campos.ORDEM = dto.ordem;
     if (dto.entrarNaSprint !== undefined) campos.ENTRAR_NA_SPRINT = dto.entrarNaSprint;
 
+    // No card vinculado a etapa vem da secao do Asana (sync); so o local a
+    // define aqui. Sem isso o card local nunca aparece em "Atencao".
+    if (dto.etapaSprint !== undefined) {
+      const contexto = await this.repo.contextoDoCard(id);
+      if (contexto?.idEquipe !== null) {
+        throw new BadRequestException(
+          'A etapa de um card vinculado ao Asana segue a coluna da tarefa no Asana.',
+        );
+      }
+      campos.ETAPA_SPRINT = dto.etapaSprint;
+    }
+
     let dataLimite = card.dataLimite ? deDataAsana(card.dataLimite) : null;
     if (dto.dataLimite !== undefined) {
       dataLimite = dto.dataLimite ? deDataAsana(dto.dataLimite) : null;

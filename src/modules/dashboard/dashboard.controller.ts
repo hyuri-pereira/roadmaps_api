@@ -54,7 +54,7 @@ export class DashboardController {
 
   @Get('atencao')
   @ApiOperation({
-    summary: 'Cards parados, com pendencia externa ou com erro de sincronizacao',
+    summary: 'Cards atrasados, parados, com pendencia externa ou com erro de sincronizacao',
     description: 'A lista curta do que trava o roadmap agora.',
   })
   atencao(@UsuarioAtual() usuario: UsuarioAutenticado): Promise<CardAcompanhamentoDto[]> {

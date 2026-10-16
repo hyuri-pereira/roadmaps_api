@@ -202,6 +202,17 @@ export class AtualizarCardDto {
   @IsOptional()
   entrarNaSprint?: boolean;
 
+  @ApiPropertyOptional({
+    enum: ETAPAS,
+    nullable: true,
+    description:
+      'Coluna do quadro. So para card de roadmap local; no vinculado quem manda ' +
+      'e a secao do Asana. Envie null para tirar o card do quadro.',
+  })
+  @IsIn(ETAPAS as unknown as string[])
+  @IsOptional()
+  etapaSprint?: string | null;
+
   @ApiPropertyOptional()
   @Type(() => Number)
   @IsInt()
